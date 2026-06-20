@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: theme("colors.line");
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base text-ink font-sans antialiased;
+    /* Ambient grid + faint vignette baked into the page background */
+    background-image:
+      radial-gradient(
+        1200px 600px at 50% -10%,
+        rgba(99, 102, 241, 0.1),
+        transparent 60%
+      ),
+      linear-gradient(rgba(237, 239, 247, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 239, 247, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 56px 56px, 56px 56px;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.25);
+    color: #fff;
+  }
+
+  /* Visible, branded keyboard focus */
+  :focus-visible {
+    outline: 2px solid theme("colors.cyan");
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-muted;
+  }
+
+  /* Iridescent gradient text — used sparingly on key headline fragments */
+  .text-iris {
+    @apply bg-iris bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply rounded-2xl border border-line bg-surface/70 backdrop-blur-xl;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-line;
+  }
+}
+
+/* Custom scrollbar (desktop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0b0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #23252f;
+    border-radius: 999px;
+    border: 2px solid #0a0b0f;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2e3140;
+  }
+}
+
+/* Honor reduced motion globally as a safety net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
