@@ -12,8 +12,8 @@ interface CounterProps {
   durationMs?: number;
   className?: string;
 }
-
-/** Counts from 0 → value when scrolled into view (instant under reduced motion). */
+ 
+/** Counts from 0 → value when scrolled into view (instant under reduced motion). 123 */
 export function Counter({
   value,
   prefix = "",
