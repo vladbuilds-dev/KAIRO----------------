@@ -118,7 +118,12 @@ function Graph({ reduced }: { reduced: boolean }) {
       </points>
 
       {flows.map((_, i) => (
-        <mesh key={i} ref={(el) => (flowRefs.current[i] = el)}>
+        <mesh
+          key={i}
+          ref={(el) => {
+            flowRefs.current[i] = el;
+          }}
+        >
           <sphereGeometry args={[0.055, 8, 8]} />
           <meshBasicMaterial color="#A5F3FC" transparent depthWrite={false} />
         </mesh>
